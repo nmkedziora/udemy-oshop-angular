@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
-import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'bs-navbar',
@@ -11,18 +9,14 @@ import { Observable } from 'rxjs/Observable';
 
 export class BsNavbarComponent {
   show: boolean = false;
-  user$: Observable<firebase.User>;
 
-  constructor(private afAuth: AngularFireAuth) {
-    this.user$ = afAuth.authState;
-    
-  }
+  constructor(public auth: AuthService) { }
 
   toggleShow() {
    this.show = !this.show;
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.logout();
   }
 }
