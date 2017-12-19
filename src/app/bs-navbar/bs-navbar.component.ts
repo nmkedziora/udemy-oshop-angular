@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'bs-navbar',
@@ -9,7 +10,13 @@ import { Component } from '@angular/core';
 export class BsNavbarComponent {
   show: boolean = false;
 
+  constructor(private afAuth: AngularFireAuth) { }
+
   toggleShow() {
    this.show = !this.show;
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
   }
 }
