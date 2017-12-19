@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,26 +12,14 @@ import { UserService } from './user.service';
 })
 
 export class AppComponent {
-  constructor(private userService: UserService, private angularFireAuth: AngularFireAuth, private router: Router) {
-    angularFireAuth.auth.getRedirectResult().then(result => {
-      if (result.user) {
-        let route = localStorage.getItem('returnUrl');
+  constructor(private auth: AuthService, private userService: UserService, private router: Router) {
+    auth.user$.subscribe(user => {
+      if (user) {
+        const route = localStorage.getItem('returnUrl');
 
-        userService.save(result.user);
-        router.navigate([route]);
+        userService.save(user);
+        router.navigateByUrl(route);
       }
     });
   }
-
-  //   alternatively:
-
-  //   constructor(private auth: AuthService, private router: Router) {
-  //   auth.user$.subscribe(user => {
-  //     if (user) {
-  //       let route = localStorage.getItem('returnUrl');
-
-  //       this.router.navigateByUrl(route);
-  //     }
-  //   });
-  // }
 }
