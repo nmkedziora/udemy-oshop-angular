@@ -12,6 +12,7 @@ import 'rxjs/add/operator/take';
 export class ProductFormComponent {
   categories$;
   product$ = {};
+  id;
 
   constructor(
     categoryService: CategoryService,
@@ -27,8 +28,12 @@ export class ProductFormComponent {
     }
   }
 
-  save(product) {
-    this.productService.create(product);
+  save( product) {
+    if (this.id) {
+      this.productService.update(this.id, product);
+    } else {
+      this.productService.create(product);
+    }
     this.router.navigate(['/admin/products']);
   }
 
