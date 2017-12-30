@@ -16,7 +16,7 @@ export class ProductFormComponent {
 
   constructor(
     categoryService: CategoryService,
-    private productService: ProductService
+    private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute) {
 
