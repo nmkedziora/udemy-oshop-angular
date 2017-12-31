@@ -28,11 +28,11 @@
         <div class="alert alert-danger" *ngIf="category.touched && category.invalid">This field is required</div>
       </div>
       <div class="form-group">
-        <label for="imageURL">Image URL</label>
-        <input #imageURL="ngModel" [(ngModel)]="product$.category" name="imageURL" id="imageURL" type="text" class="form-control" required url>
-        <div class="alert alert-danger" *ngIf="imageURL.touched && imageURL.invalid">
-          <div *ngIf="imageURL.errors.required">This field is required</div>
-          <div *ngIf="imageURL.errors.url">Invalid URL</div>
+        <label for="imageUrl">Image URL</label>
+        <input #imageUrl="ngModel" [(ngModel)]="product$.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
+        <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+          <div *ngIf="imageUrl.errors.required">This field is required</div>
+          <div *ngIf="imageUrl.errors.url">Invalid URL</div>
         </div>
       </div>
       <button class="btn btn-primary">Save</button>
@@ -41,7 +41,7 @@
   </div>
   <div class="col-md-6">
     <div class="card" style="width: 18rem;">
-      <img class="card-img-top" [src]="product$.imageURL" *ngIf="product$.imageURL">
+      <img class="card-img-top" [src]="product$.imageUrl" *ngIf="product$.imageUrl">
       <div class="card-body">
         <h5 class="card-title">{{ product$.title }}</h5>
         <p class="card-text">{{ product$.price | currency:'USD':true }}</p>
